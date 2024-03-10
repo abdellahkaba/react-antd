@@ -1,24 +1,25 @@
 import './App.css';
-import {Select} from "antd";
+import {Form, Button, Input} from "antd";
 
 
 function App() {
-    const fruits = ['Bananne', 'Mangue', 'Orange']
-
+    const onFinish = (e) => {
+        console.log(e)
+    }
     return (
     <div className="App">
        <header className="App-header">
-           <p>Chosissez votre Fruit</p>
-            <Select
-                mode='multiple'
-                placeholder='Selectionner'
-                maxTagCount={2}
-                allowClear
-                style={{width: '50%'}} >
-                {fruits.map((fruit,index) => {
-                    return <Select.Option key={index} value={fruit}>{fruit}</Select.Option>
-                })}
-            </Select>
+         <Form onFinish={onFinish}>
+             <Form.Item label="User Name" name="username">
+                 <Input placeholder="User name" required></Input>
+             </Form.Item>
+             <Form.Item label="Mot de pass" name="password">
+                 <Input.Password placeholder="Mot de passe"></Input.Password>
+             </Form.Item>
+             <Form.Item>
+                 <Button block type='primary' htmlType='submit'>Login</Button>
+             </Form.Item>
+         </Form>
        </header>
 
     </div>
