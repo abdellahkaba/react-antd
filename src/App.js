@@ -1,73 +1,77 @@
-import './App.css';
-import {Table} from "antd";
-const data = [
-    {
-        name : "Kaba",
-        age : 25,
-        adress : "Poste Thiaroye",
-        key : 1
-    },
-    {
-        name : "N'diaye",
-        age : 28,
-        adress : "Dakar",
-        key : 2
-    },
-    {
-        name : "Balla",
-        age : 26,
-        adress : "Pikin",
-        key : 3
-    },
-    {
-        name : "Kamara",
-        age : 18,
-        adress : "Medine",
-        key : 4
-    }
-]
-const columns = [
-    {
-        title: 'Name',
-        dataIndex:'name',
-        key: 'key',
-        render: name => {
-            return <a>{name}</a>
-        }
-    },
-    {
-        title: 'Age',
-        dataIndex:'age',
-        key: 'key',
-        sorter: (a,b) => a.age - b.age
-    }, {
-        title: 'Adress',
-        dataIndex:'adress',
-        key: 'key'
-    },
-    {
-        title: 'Graduated?',
-        key: 'key',
-        render: payload => {
-          return <p>{payload.age>20?'True':'False'}</p>
-        }
-    }
-]
-function App() {
-    return (
-    <div className="App">
-       <header className="App-header">
-            <Table
-                dataSource={data}
-                columns={columns}
-                pagination
-            >
+import React from 'react';
+import { Button, Checkbox, Form, Input } from 'antd';
+const onFinish = (values) => {
+    console.log('Success:', values);
+};
+const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+};
+const App = () => (
+    <Form
+        name="basic"
+        labelCol={{
+            span: 8,
+        }}
+        wrapperCol={{
+            span: 16,
+        }}
+        style={{
+            maxWidth: 600,
+        }}
+        initialValues={{
+            remember: true,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
+    >
+        <Form.Item
+            label="Username"
+            name="username"
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your username!',
+                },
+            ]}
+        >
+            <Input />
+        </Form.Item>
 
-            </Table>
-       </header>
+        <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+                {
+                    required: true,
+                    message: 'Please input your password!',
+                },
+            ]}
+        >
+            <Input.Password />
+        </Form.Item>
 
-    </div>
-  );
-}
+        <Form.Item
+            name="remember"
+            valuePropName="checked"
+            wrapperCol={{
+                offset: 8,
+                span: 16,
+            }}
+        >
+            <Checkbox>Remember me</Checkbox>
+        </Form.Item>
 
+        <Form.Item
+            wrapperCol={{
+                offset: 8,
+                span: 16,
+            }}
+        >
+            <Button type="primary" htmlType="submit">
+                Submit
+            </Button>
+        </Form.Item>
+    </Form>
+);
 export default App;
